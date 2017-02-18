@@ -1,0 +1,42 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src="javascripts/eliza/eliza.js"></script>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css"> 
+
+</head>
+<body>
+<div class="container">
+
+<h2 class="text-center"  id="post_data"></h2>
+<div id= "center">
+	
+
+<div id="response_box"><br> </div>
+
+	<div id="name_box" class="formField" style="display: none;">
+	<h3>Please enter your name</h3>	
+	<form method="POST" id="formName" class="form-inline" action="" onsubmit="return subName()" >
+	<input "bottom-align" type="text" name = "name"/>
+	 <button  class="btn btn-default" type="button" onclick= "subName()" >Submit </button>
+	</form>
+	</div>
+
+<div id= "eliza_input" class="formField">
+<form  method = "POST"  id="form" onsubmit="return sub()">
+<input type = "text" name = "first_name" /><button onclick= "sub()" color=" #4267B2" class="btn btn-default" id="message" type="button">Submit </button>
+      </form>
+</div>
+
+</div>
+</div>
+   </body>
+</html>
+

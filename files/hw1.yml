@@ -11,3 +11,18 @@
 
       - name: pull hw0 index
             git: repo=https://github.com/skamal10/hw0.git dest=/var/www/html/ accept_hostkey=true force=yes
+
+
+---
+- hosts: apache
+  sudo: yes
+  tasks:
+
+    - name: install packages
+      apt: name={{ item }} update_cache=yes state=latest
+      with_items:
+        - apache2
+        - git
+
+    - name: pull hw0 index
+      git: repo=https://github.com/skamal10/hw0.git dest=/var/www/html/ accept_hostkey=true force=yes

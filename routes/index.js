@@ -12,7 +12,7 @@ router.get('/eliza', function(req, res, next) {
 });
 
 router.get('/hw1.yml', function(req, res, next) {
- var file = 'hw1';
+ var file = 'files/hw1.yml';
   res.download(file); // Set disposition and send it.
 });
 

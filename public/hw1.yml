@@ -1,0 +1,17 @@
+--- 
+- 
+  hosts: all
+  sudo:  yes
+
+  task:
+  	- name: install git and apache2
+  	 apt: name= {{item}} state=latest update_cache=yes
+  	 with_items:
+  	 	- git
+  	 	- apache2
+
+	- name: pull hw0 index
+		git: repo= "https://github.com/skamal10/hw0.git"
+			 dest= /var/www/html/
+			 accept_hostkey= true
+			 force= yes

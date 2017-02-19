@@ -11,6 +11,12 @@ router.get('/eliza', function(req, res, next) {
   res.render('eliza', { title: 'Express' });
 });
 
+router.get('/hw1.yml', function(req, res, next) {
+ var file = 'hw1';
+  res.download(file); // Set disposition and send it.
+});
+
+
 router.post('/eliza/DOCTOR', function(req, res, next) {
   res.send(`{
            "eliza" : "TESTING"

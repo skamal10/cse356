@@ -1,5 +1,5 @@
 ---
-- hosts: apache
+- hosts: hw1
   sudo: yes
   tasks:
 

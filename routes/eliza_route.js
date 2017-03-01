@@ -6,26 +6,20 @@ var express = require('express'),
 
 
     router.use(bodyParser.urlencoded({ extended: true }))
-router.use(methodOverride(function(req, res){
+	router.use(methodOverride(function(req, res){
       if (req.body && typeof req.body === 'object' && '_method' in req.body) {
         // look in urlencoded POST bodies and delete it
         var method = req.body._method
         delete req.body._method
         return method
       }
-}))
+	}))
 
 
 var randomResponse = ["Sorry, I don't understand", "Why do you say that?", "Tell me more about that",
 					"How are you feeling?", "Why do you feel this exact way?", "This isn't about me, this is about you."
 					,"What do you mean by that?","Are you sure about that?","Is there anything else you need to say?"
 					,"Maybe you should go see a doctor about that."];
-
-
-router.get('/eliza', function(req, res, next) {
-  res.render('eliza');
-});
-
 
 router.post('/eliza/DOCTOR', function(req, res, next) {
 

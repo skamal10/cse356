@@ -12,6 +12,10 @@ router.get('/hw1.yml', function(req, res, next) {
   res.download(file); 
 });
 
+router.get('/eliza', function(req, res, next) {
+  res.render('eliza');
+});
+
 
 
 

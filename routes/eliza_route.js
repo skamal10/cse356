@@ -5,7 +5,7 @@ var express = require('express'),
     methodOverride = require('method-override'); //used to manipulate POST
 
 
-    router.use(bodyParser.urlencoded({ extended: true }))
+  router.use(bodyParser.urlencoded({ extended: true }))
 	router.use(methodOverride(function(req, res){
       if (req.body && typeof req.body === 'object' && '_method' in req.body) {
         // look in urlencoded POST bodies and delete it
@@ -31,16 +31,13 @@ router.post('/eliza/DOCTOR', function(req, res, next) {
 router.post('/eliza/new-convo', function(req, res, next) {
 
 	var user_id = 1;
-	var convo_id = 1;
             mongoose.model('Convo').create({
             user_id : user_id,
-            convo_id : convo_id,
             convo : req.body
         }, function (err, blob) {
               if (err) {
                   res.send("There was a problem adding the information to the database.");
               } else {
-                  //Blob has been created
                   res.send("CREATED!");
               }
         })
@@ -48,7 +45,7 @@ router.post('/eliza/new-convo', function(req, res, next) {
 
 router.get('/eliza/getconv/:id',function(req,res,next){
 
-  mongoose.model('Convo').findOne({ 'convo_id': 1 },function (err, convo) {
+  mongoose.model('Convo').findOne({ '_id': 1 },function (err, convo) {
       if (err) {
         console.log('GET Error: There was a problem retrieving: ' + err);
         res.send("NOT FOUND");

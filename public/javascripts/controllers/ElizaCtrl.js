@@ -6,6 +6,8 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
 	$scope.responses = [];
 	$scope.human= "";
   $scope.loaded=false;
+  $scope.convo_list=[];
+
 
 	$scope.elizaResponse = function(){
 
@@ -52,5 +54,25 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
                  console.log(data.convo);
                  $scope.loaded=true;
           });
+    }
+
+    $scope.listConvos = function() {
+
+         $http({
+          method  : 'GET',
+          url     : '/eliza/listconv'
+         })
+          .success(function(data) {
+              for(var i=0;i<data.length;i++){
+
+                  var convo = {};
+                  convo.id = data.convo_id;
+                  convo.date = data.date;
+                  $scope.convo_list.push( convo );
+              }
+          });
+
+
+
     }
   });

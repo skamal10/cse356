@@ -48,7 +48,7 @@ router.post('/eliza/new-convo', function(req, res, next) {
 
 router.get('/eliza/getconv/:id',function(req,res,next){
 
-mongoose.model('Convo').findOne({ 'convo_id': 1 },function (err, convo) {
+  mongoose.model('Convo').findOne({ 'convo_id': 1 },function (err, convo) {
       if (err) {
         console.log('GET Error: There was a problem retrieving: ' + err);
         res.send("NOT FOUND");
@@ -60,5 +60,19 @@ mongoose.model('Convo').findOne({ 'convo_id': 1 },function (err, convo) {
 
 });
 
+
+router.get('/eliza/getconv/:id',function(req,res,next){
+
+  mongoose.model('Convo').find({ 'user_id': 1 },function (err, convo_list) {
+      if (err) {
+        console.log('GET Error: There was a problem retrieving: ' + err);
+        res.send("NOT FOUND");
+      } else {
+          res.send(convo_list);
+      }
+    });
+
+
+});
 
 module.exports = router;

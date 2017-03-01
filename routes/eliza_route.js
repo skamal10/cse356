@@ -49,7 +49,7 @@ router.post('/eliza/getconv',function(req,res,next){
   console.log(id);
   mongoose.model('Convo').findOne({ '_id': id },function (err, convo) {
       if (err) {
-        res.send({ status:”ERROR” });
+        res.send({ status: 'ERROR' });
       } else {
           var response= {};
           response.status = "OK";

@@ -60,7 +60,7 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
     $scope.listConvos = function() {
 
          $http({
-          method  : 'GET',
+          method  : 'POST',
           url     : '/eliza/listconv'
          })
           .success(function(data) {

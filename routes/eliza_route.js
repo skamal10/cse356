@@ -61,7 +61,7 @@ router.get('/eliza/getconv/:id',function(req,res,next){
 });
 
 
-router.get('/eliza/getconv/:id',function(req,res,next){
+router.get('/eliza/listconv',function(req,res,next){
 
   mongoose.model('Convo').find({ 'user_id': 1 },function (err, convo_list) {
       if (err) {

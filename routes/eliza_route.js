@@ -52,18 +52,18 @@ router.post('/eliza/new-convo', function(req, res, next) {
 
 router.post('/eliza/getconv',function(req,res,next){
 
-  var id= req.['id'];
-  console.log(req.body);
-  mongoose.model('Convo').findOne({ '_id': id },function (err, convo) {
-      if (err) {
-        res.send({ status: 'ERROR' });
-      } else {
-          var response= {};
-          response.status = "OK";
-          response.conversation = convo;
-          res.send(response);
-      }
-    });
+  //var id= req.['id'];
+  console.log(req);
+  // mongoose.model('Convo').findOne({ '_id': id },function (err, convo) {
+  //     if (err) {
+  //       res.send({ status: 'ERROR' });
+  //     } else {
+  //         var response= {};
+  //         response.status = "OK";
+  //         response.conversation = convo;
+  //         res.send(response);
+  //     }
+  //   });
 
 
 });

@@ -23,9 +23,6 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
          })
           .success(function(data) {
 
-        res.send(JSON.stringify({ eliza: randomResponse[index] })  );
-
-
         $scope.responses.push( {"human" : $scope.human} ); // push the human input first
  				$scope.responses.push(data); // then lets push the eliza response
  				$scope.human=""; // clear the input field after submission

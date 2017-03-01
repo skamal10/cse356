@@ -28,7 +28,4 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
  				$scope.human=""; // clear the input field after submission
           });
     };
-
-
-   
   });

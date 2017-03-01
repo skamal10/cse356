@@ -7,8 +7,8 @@
 6 silly lifecycle serverproject@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle serverproject@0.0.0~start: serverproject@0.0.0
 8 verbose lifecycle serverproject@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle serverproject@0.0.0~start: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/var/www/html/cse356/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
-10 verbose lifecycle serverproject@0.0.0~start: CWD: /var/www/html/cse356
+9 verbose lifecycle serverproject@0.0.0~start: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/sajidkamal/Desktop/serverproject/node_modules/.bin:/home/sajidkamal/bin:/home/sajidkamal/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+10 verbose lifecycle serverproject@0.0.0~start: CWD: /home/sajidkamal/Desktop/serverproject
 11 silly lifecycle serverproject@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle serverproject@0.0.0~start: Returned: code: 1  signal: null
 13 info lifecycle serverproject@0.0.0~start: Failed to exec start script
@@ -23,8 +23,8 @@
 14 verbose stack     at maybeClose (internal/child_process.js:890:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
 15 verbose pkgid serverproject@0.0.0
-16 verbose cwd /var/www/html/cse356
-17 error Linux 2.6.32-042stab120.16
+16 verbose cwd /home/sajidkamal/Desktop/serverproject
+17 error Linux 4.4.0-31-generic
 18 error argv "/usr/bin/nodejs" "/usr/bin/npm" "start"
 19 error node v7.5.0
 20 error npm  v4.1.2

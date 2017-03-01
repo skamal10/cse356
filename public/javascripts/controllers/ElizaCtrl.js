@@ -66,8 +66,8 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
               for(var i=0;i<data.length;i++){
 
                   var convo = {};
-                  convo.id = data.convo_id;
-                  convo.date = data.date;
+                  convo.id = data[i].convo_id;
+                  convo.date = data[i].date;
                   $scope.convo_list.push( convo );
               }
           });

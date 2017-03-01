@@ -35,7 +35,7 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
           data    : $scope.responses //forms user object
          })
           .success(function(data) {
- 				console.log(data);
+ 				
           });
 
     }

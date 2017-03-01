@@ -78,7 +78,7 @@ router.post('/eliza/listconv',function(req,res,next){
           var convos= {};
           convos.status= 'OK';
           convos.conversations = convo_list.slice();
-          res.send(convos});
+          res.send(convos);
       }
     });
 

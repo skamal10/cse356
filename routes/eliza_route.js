@@ -46,5 +46,10 @@ router.post('/eliza/new-convo', function(req, res, next) {
         })
 });
 
+router.get('/eliza/getonv',function(req,res,next){
+
+
+});
+
 
 module.exports = router;

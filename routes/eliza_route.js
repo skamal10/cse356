@@ -51,9 +51,9 @@ router.get('/eliza/getconv/:id',function(req,res,next){
 mongoose.model('Convo').find({ 'convo_id': 1 },function (err, convo) {
       if (err) {
         console.log('GET Error: There was a problem retrieving: ' + err);
-        res.send("ERROR");
+        res.send("NOT FOUND");
       } else {
-          res.send("GOT IT");
+          res.send(convo);
       }
     });
 

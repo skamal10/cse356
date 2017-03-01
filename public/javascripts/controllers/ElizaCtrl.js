@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
+angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope, $http,$cookies) {
 
 
 	$scope.responses = [];
@@ -15,6 +15,11 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
 		$scope.sendResponse();
 	
    	}
+
+    $scope.printCookies= function(){
+      alert($cookies.get('test'));
+    }
+
 
    	$scope.sendResponse = function () {
 

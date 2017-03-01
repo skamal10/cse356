@@ -5,7 +5,7 @@ var express = require('express'),
     methodOverride = require('method-override'); //used to manipulate POST
 
 
-var responses= [];
+var loggedInUser= 1;
 
   router.use(bodyParser.urlencoded({ extended: true }))
 	router.use(methodOverride(function(req, res){
@@ -70,12 +70,15 @@ router.post('/eliza/getconv',function(req,res,next){
 
 router.post('/eliza/listconv',function(req,res,next){
 
-  mongoose.model('Convo').find({ 'user_id': 1 },function (err, convo_list) {
+  mongoose.model('Convo').find({ 'user_id': loggedInUser },function (err, convo_list) {
       if (err) {
-        console.log('GET Error: There was a problem retrieving: ' + err);
-        res.send("NOT FOUND");
+        res.send({ status: 'ERROR' });
       } else {
-          res.send(convo_list);
+
+          var convos= {};
+          convos.status= 'OK';
+          convos.conversations = convo_list.slice();
+          res.send(convos});
       }
     });
 

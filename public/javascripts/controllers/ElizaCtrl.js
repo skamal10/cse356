@@ -64,11 +64,11 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
           url     : '/eliza/listconv'
          })
           .success(function(data) {
-              for(var i=0;i<data.length;i++){
+              for(var i=0;i<data.conversations.length;i++){
 
                   var convo = {};
-                  convo.id = data[i].convo_id;
-                  convo.date = new Date(data[i].date).toString();
+                  convo.id = data.conversations[i]._id;
+                  convo.date = new Date(data.conversations[i].date).toString();
                   $scope.convo_list.push( convo );
               }
           });

@@ -46,7 +46,7 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
           url     : '/eliza/getconv/1'
          })
           .success(function(data) {
-                 alert(data);
+                 alert(data.convo);
           });
     }
   });

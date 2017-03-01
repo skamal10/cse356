@@ -32,8 +32,18 @@ router.post('/eliza/new-convo', function(req, res, next) {
 
 	var user_id = 1;
 	var convo_id = 1;
-	
-
+            mongoose.model('Convo').create({
+            user_id : user_id,
+            convo_id : convo_id,
+            convo : req.body
+        }, function (err, blob) {
+              if (err) {
+                  res.send("There was a problem adding the information to the database.");
+              } else {
+                  //Blob has been created
+                  res.send("CREATED!");
+              }
+        })
 });
 
 

@@ -9,6 +9,7 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
   $scope.convo_list=[];
 
 
+
 	$scope.elizaResponse = function(){
 
 		$scope.sendResponse();
@@ -51,8 +52,7 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
           data    : { id : 0 }
          })
           .success(function(data) {
-                 $scope.responses = data.convo;
-                 console.log(data.convo);
+                 $scope.responses = data.conversation;
                  $scope.loaded=true;
           });
     }

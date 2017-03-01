@@ -46,7 +46,7 @@ router.post('/eliza/new-convo', function(req, res, next) {
 router.post('/eliza/getconv',function(req,res,next){
 
   var id= req.body['id'];
-  console.log(id);
+  console.log(req.body);
   mongoose.model('Convo').findOne({ '_id': id },function (err, convo) {
       if (err) {
         res.send({ status: 'ERROR' });

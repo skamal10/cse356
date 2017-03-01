@@ -48,7 +48,7 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
       $http({
           method  : 'POST',
           url     : '/eliza/getconv/',
-          data    : 0
+          data    : {id : 0}
          })
           .success(function(data) {
                  $scope.responses = data.convo;

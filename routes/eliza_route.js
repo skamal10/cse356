@@ -5,6 +5,8 @@ var express = require('express'),
     methodOverride = require('method-override'); //used to manipulate POST
 
 
+var responses= [];
+
   router.use(bodyParser.urlencoded({ extended: true }))
 	router.use(methodOverride(function(req, res){
       if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -23,7 +25,12 @@ var randomResponse = ["Sorry, I don't understand", "Why do you say that?", "Tell
 
 router.post('/eliza/DOCTOR', function(req, res, next) {
 
+
+responses.push(req);
+
 	var index = Math.floor(Math.random() * randomResponse.length);
+
+responses.push()
     res.send(JSON.stringify({ eliza: randomResponse[index] })  );
 
 });
@@ -45,7 +52,7 @@ router.post('/eliza/new-convo', function(req, res, next) {
 
 router.post('/eliza/getconv',function(req,res,next){
 
-  var id= req.body['id'];
+  var id= req.['id'];
   console.log(req.body);
   mongoose.model('Convo').findOne({ '_id': id },function (err, convo) {
       if (err) {

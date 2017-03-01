@@ -43,14 +43,18 @@ router.post('/eliza/new-convo', function(req, res, next) {
         })
 });
 
-router.get('/eliza/getconv/:id',function(req,res,next){
+router.post('/eliza/getconv',function(req,res,next){
 
-  mongoose.model('Convo').findOne({ '_id': 1 },function (err, convo) {
+  var id= req.body['id'];
+  console.log(id);
+  mongoose.model('Convo').findOne({ '_id': id },function (err, convo) {
       if (err) {
-        console.log('GET Error: There was a problem retrieving: ' + err);
-        res.send("NOT FOUND");
+        res.send({ status:”ERROR” });
       } else {
-          res.send(convo);
+          var response= {};
+          response.status = "OK";
+          response.conversation = convo;
+          res.send(response);
       }
     });
 
@@ -58,7 +62,7 @@ router.get('/eliza/getconv/:id',function(req,res,next){
 });
 
 
-router.get('/eliza/listconv',function(req,res,next){
+router.post('/eliza/listconv',function(req,res,next){
 
   mongoose.model('Convo').find({ 'user_id': 1 },function (err, convo_list) {
       if (err) {

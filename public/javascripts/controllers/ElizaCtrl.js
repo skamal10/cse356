@@ -4,7 +4,8 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
 
 
 	$scope.responses = [];
-	$scope.human="";
+	$scope.human= "";
+  $scope.loaded=false;
 
 	$scope.elizaResponse = function(){
 
@@ -49,6 +50,7 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
           .success(function(data) {
                  $scope.responses = data.convo;
                  console.log(data.convo);
+                 $scope.loaded=true;
           });
     }
   });

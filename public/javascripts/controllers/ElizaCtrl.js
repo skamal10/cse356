@@ -48,6 +48,7 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
          })
           .success(function(data) {
                  $scope.responses = data.convo;
+                 console.log(data.convo);
           });
     }
   });

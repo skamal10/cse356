@@ -67,7 +67,7 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
 
                   var convo = {};
                   convo.id = data[i].convo_id;
-                  convo.date = data[i].date;
+                  convo.date = new Date(data[i].date);
                   $scope.convo_list.push( convo );
               }
           });

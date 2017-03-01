@@ -9,11 +9,10 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
 	$scope.elizaResponse = function(){
 
 		$scope.sendResponse();
-
 	
    	}
 
-   	 $scope.sendResponse = function () {
+   	$scope.sendResponse = function () {
 
 
    	 	 $http({
@@ -28,4 +27,16 @@ angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http) {
  				$scope.human=""; // clear the input field after submission
           });
     };
+
+    $scope.saveConvo = function(){
+    	$http({
+          method  : 'POST',
+          url     : '/eliza/new-convo',
+          data    : $scope.responses //forms user object
+         })
+          .success(function(data) {
+ 				console.log(data);
+          });
+
+    }
   });

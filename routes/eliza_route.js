@@ -25,12 +25,16 @@ router.post('/eliza/DOCTOR', function(req, res, next) {
 
 	var index = Math.floor(Math.random() * randomResponse.length);
     res.send(JSON.stringify({ eliza: randomResponse[index] })  );
+
 });
 
+router.post('/eliza/new-convo', function(req, res, next) {
 
+	var user_id = 1;
+	var convo_id = 1;
+	res.send(req);
 
-router.post('/eliza/new', function(req, res) {
-   console.log(req);
 });
+
 
 module.exports = router;

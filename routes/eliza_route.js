@@ -16,6 +16,24 @@ router.use(methodOverride(function(req, res){
 }))
 
 
+var randomResponse = ["Sorry, I don't understand", "Why do you say that?", "Tell me more about that",
+					"How are you feeling?", "Why do you feel this exact way?", "This isn't about me, this is about you."
+					,"What do you mean by that?","Are you sure about that?","Is there anything else you need to say?"
+					,"Maybe you should go see a doctor about that."];
+
+
+router.get('/eliza', function(req, res, next) {
+  res.render('eliza', { title: 'Express' });
+});
+
+
+router.post('/eliza/DOCTOR', function(req, res, next) {
+
+	var index = Math.floor(Math.random() * randomResponse.length);
+    res.send(JSON.stringify({ eliza: randomResponse[index] })  );
+});
+
+
 
 router.post('/new', function(req, res) {
    console.log(req);

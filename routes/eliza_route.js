@@ -48,7 +48,7 @@ router.post('/eliza/new-convo', function(req, res, next) {
 
 router.get('/eliza/getconv/:id',function(req,res,next){
 
-mongoose.model('Convo').$where(user_id == req.params.id).exec(function (err, convo) {
+mongoose.model('Convo').find({ 'convo_id': 1 },function (err, convo) {
       if (err) {
         console.log('GET Error: There was a problem retrieving: ' + err);
         res.send("ERROR");

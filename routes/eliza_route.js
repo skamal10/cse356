@@ -23,7 +23,7 @@ var randomResponse = ["Sorry, I don't understand", "Why do you say that?", "Tell
 
 
 router.get('/eliza', function(req, res, next) {
-  res.render('eliza', { title: 'Express' });
+  res.render('eliza');
 });
 
 
@@ -35,7 +35,7 @@ router.post('/eliza/DOCTOR', function(req, res, next) {
 
 
 
-router.post('/new', function(req, res) {
+router.post('/eliza/new', function(req, res) {
    console.log(req);
 });
 

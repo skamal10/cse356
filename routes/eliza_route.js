@@ -25,7 +25,7 @@ var randomResponse = ["Sorry, I don't understand", "Why do you say that?", "Tell
 					,"What do you mean by that?","Are you sure about that?","Is there anything else you need to say?"
 					,"Maybe you should go see a doctor about that."];
 
-router.post('/eliza/DOCTOR', function(req, res, next) {
+router.post('/DOCTOR', function(req, res, next) {
 
 
 	var index = Math.floor(Math.random() * randomResponse.length);
@@ -33,7 +33,7 @@ router.post('/eliza/DOCTOR', function(req, res, next) {
 
 });
 
-router.post('/eliza/new-convo', function(req, res, next) {
+router.post('/new-convo', function(req, res, next) {
 
 	         var user_id = 1;
 
@@ -49,7 +49,7 @@ router.post('/eliza/new-convo', function(req, res, next) {
         })
 });
 
-router.post('/eliza/getconv',function(req,res,next){
+router.post('/getconv',function(req,res,next){
 
   var id= req.body['id'];
   mongoose.model('Convo').findOne({ '_id': id },function (err, convo) {
@@ -67,7 +67,7 @@ router.post('/eliza/getconv',function(req,res,next){
 });
 
 
-router.post('/eliza/listconv',function(req, res, next){
+router.post('/listconv',function(req, res, next){
 
   mongoose.model('Convo').find({ 'user_id': loggedInUser },function (err, convo_list) {
       if (err) {
@@ -84,7 +84,7 @@ router.post('/eliza/listconv',function(req, res, next){
 
 });
 
-router.post('/eliza/adduser',function(req, res, next){
+router.post('/adduser',function(req, res, next){
 
 
       var username = req.body['username'];
@@ -110,7 +110,7 @@ router.post('/eliza/adduser',function(req, res, next){
 });
 
 
-router.post('/eliza/verify', function(req, res, next){
+router.post('/verify', function(req, res, next){
 
   var email = req.body['email'];
   var key   = req.body['key'];
@@ -142,7 +142,7 @@ router.post('/eliza/verify', function(req, res, next){
 
 });
 
-router.post('/eliza/login', function(req, res, next){
+router.post('/login', function(req, res, next){
 
   var username = req.body['username'];
   var password = req.body['password'];
@@ -163,5 +163,20 @@ router.post('/eliza/login', function(req, res, next){
   });
 
 });
+
+
+router.post('/logout', function(req, res, next){
+
+  if(loggedInUser != -1){
+      loggedInUser = -1; // log out
+      res.send({ status: 'OK' });
+  }
+  else{
+    res.send({ status: 'ERROR' });
+  }
+
+});
+
+
 
 module.exports = router;

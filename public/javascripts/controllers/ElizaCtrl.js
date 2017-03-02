@@ -38,7 +38,7 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
 
    	 	 $http({
           method  : 'POST',
-          url     : '/eliza/DOCTOR',
+          url     : '/DOCTOR',
           data    : $scope.human, //forms user object
           headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
          })
@@ -53,7 +53,7 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
     $scope.saveConvo = function(){
     	$http({
           method  : 'POST',
-          url     : '/eliza/new-convo',
+          url     : '/new-convo',
           data    : $scope.responses //forms user object
          })
           .success(function(data) {
@@ -65,7 +65,7 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
     $scope.getConvos = function(){
       $http({
           method  : 'POST',
-          url     : '/eliza/getconv/',
+          url     : '/getconv',
           data    : { id : 0 }
          })
           .success(function(data) {
@@ -78,7 +78,7 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
 
          $http({
           method  : 'POST',
-          url     : '/eliza/listconv'
+          url     : '/listconv'
          })
           .success(function(data) {
               for(var i=0;i<data.conversations.length;i++){

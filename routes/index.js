@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('eliza');
 });
 
 router.get('/hw1.yml', function(req, res, next) {
@@ -12,9 +12,9 @@ router.get('/hw1.yml', function(req, res, next) {
   res.download(file); 
 });
 
-router.get('/eliza', function(req, res, next) {
-  res.render('eliza');
-});
+// router.get('/eliza', function(req, res, next) {
+//   res.render('eliza');
+// });
 
 
 

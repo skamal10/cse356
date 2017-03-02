@@ -7,6 +7,7 @@ var express = require('express'),
 var User = mongoose.model('User');
 
 var loggedInUser = -1;
+var currentConvo = -1;
 
 
   router.use(bodyParser.urlencoded({ extended: true }))
@@ -28,7 +29,19 @@ var randomResponse = ["Sorry, I don't understand", "Why do you say that?", "Tell
 router.post('/DOCTOR', function(req, res, next) {
 
 
-	var index = Math.floor(Math.random() * randomResponse.length);
+var index = Math.floor(Math.random() * randomResponse.length);
+var response = {eliza : randomResponse[index]};
+
+var responses = [req.body , response];
+
+  if(current_convo == -1){
+        createNewConvo(responses);
+  }
+  else{
+        updateConvo(req.body,response);
+  }
+
+
   res.send(JSON.stringify({ eliza: randomResponse[index] })  );
 
 });
@@ -53,7 +66,7 @@ router.post('/getconv',function(req,res,next){
 
   var id= req.body['id'];
   mongoose.model('Convo').findOne({ '_id': id },function (err, convo) {
-      if (err) {
+      if (err || !convo) {
         res.send({ status: 'ERROR' });
       } else {
           var response= {};
@@ -70,7 +83,7 @@ router.post('/getconv',function(req,res,next){
 router.post('/listconv',function(req, res, next){
 
   mongoose.model('Convo').find({ 'user_id': loggedInUser },function (err, convo_list) {
-      if (err) {
+      if (err || !convo_list) {
         res.send({ status: 'ERROR' });
       } else {
 
@@ -166,7 +179,7 @@ router.post('/login', function(req, res, next){
 
 
 router.post('/logout', function(req, res, next){
-
+//USE COOKIES FOR THIS
   if(loggedInUser != -1){
       loggedInUser = -1; // log out
       res.send({ status: 'OK' });
@@ -176,6 +189,38 @@ router.post('/logout', function(req, res, next){
   }
 
 });
+
+
+var createNewConvo = function ( input ){
+
+        mongoose.model('Convo').create({
+            user_id : loggedInUser,
+            convo : input
+        }, function (err, convo) {
+              if (!err && convo) {
+                  currentConvo = convo._id;
+              }
+        });
+
+}
+
+var updateConvo = function(input, response){
+
+  mongoose.model('Convo').findById(currentConvo, function(err, newConvo){
+      if(err || !newConvo){
+        return false;
+      }
+      else{
+          newConvo.convo.push(input);
+          newConvo.convo.push(response);
+          newConvo.save();
+          return true;
+      }
+
+
+  });
+
+}
 
 
 

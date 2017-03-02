@@ -123,7 +123,14 @@ router.post('/eliza/verify', function(req, res, next){
       }
       else if( key === user.verify_key || key === backdoor || user.verified == true){
 
-            User.update({ _id: user._id }, { $set: { verified: true } } );
+            // User.update({ _id: user._id }, { $set: { verified: true } },function (err, user) {
+            //       if (err){
+            //          res.send({ status: 'ERROR' });
+            //       }
+            //       res.send(tank);
+            // });
+            user.verified = true;
+            user.save();
             res.send({ status: 'OK' });
       }
 

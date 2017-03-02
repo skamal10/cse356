@@ -86,14 +86,11 @@ router.post('/eliza/listconv',function(req, res, next){
 
 router.post('eliza/adduser',function(req, res, next){
 
+    console.log(req.body);
+
       var username = req.body['username'];
       var pw       = req.body['password'];
       var email    = req.body['email'];
-
-
-      console.log(username);
-      console.log(pw);
-      console.log(email);
 
       User.create({
         verified: false,

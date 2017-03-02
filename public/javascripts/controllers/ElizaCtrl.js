@@ -17,7 +17,6 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
    	}
 
     $scope.printCookies= function(){
-      alert($cookies.get('test'));
     }
 
 
@@ -81,5 +80,6 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
 
 
     }
+
 
   });

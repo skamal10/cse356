@@ -18,14 +18,7 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
 
     $scope.printCookies= function(){
 
-        $http({
-          method  : 'POST',
-          url     : '/eliza/adduser',
-          data    : {username: 'skamal' , password: 'testing' , email : 'nyklyfe@gmail.com'}, //forms user object
-         })
-          .success(function(data) {
-              alert(data);
-          });
+       alert($cookies.get('currUser'));
 
 
 
@@ -44,7 +37,7 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
          })
           .success(function(data) {
 
-        $scope.responses.push( {"human" : $scope.human} ); // push the human input first
+        $scope.responses.push( { human : $scope.human } ); // push the human input first
  				$scope.responses.push(data); // then lets push the eliza response
  				$scope.human=""; // clear the input field after submission
           });
@@ -53,8 +46,8 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
     $scope.saveConvo = function(){
     	$http({
           method  : 'POST',
-          url     : '/new-convo',
-          data    : $scope.responses //forms user object
+          url     : '/login',
+          data    : {username: 'skamal7093' , password: 'testing123'} //forms user object
          })
           .success(function(data) {
  				         console.log(data);

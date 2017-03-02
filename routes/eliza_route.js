@@ -26,13 +26,25 @@ var randomResponse = ["Sorry, I don't understand", "Why do you say that?", "Tell
 					,"What do you mean by that?","Are you sure about that?","Is there anything else you need to say?"
 					,"Maybe you should go see a doctor about that."];
 
+
+
+router.get('/', function(req, res, next) {
+
+  if(req.cookies.currUser){
+      loggedInUser= req.cookies.currUser;
+  }
+  res.render('eliza');
+  
+});
+
+
+
 router.post('/DOCTOR', function(req, res, next) {
 
 
-var index = Math.floor(Math.random() * randomResponse.length);
-var response = {eliza : randomResponse[index]};
-
-var responses = [req.body , response];
+  var index = Math.floor(Math.random() * randomResponse.length);
+  var response = {eliza : randomResponse[index]};
+  var responses = [req.body , response];
 
   if(currentConvo == -1){
         createNewConvo(responses);
@@ -136,12 +148,6 @@ router.post('/verify', function(req, res, next){
       }
       else if( key === user.verify_key || key === backdoor || user.verified == true){
 
-            // User.update({ _id: user._id }, { $set: { verified: true } },function (err, user) {
-            //       if (err){
-            //          res.send({ status: 'ERROR' });
-            //       }
-            //       res.send(tank);
-            // });
             user.verified = true;
             user.save();
             res.send({ status: 'OK' });
@@ -167,6 +173,7 @@ router.post('/login', function(req, res, next){
     }
     else if(user.password === password && user.verified){
       loggedInUser = user._id;
+      res.cookie('currUser', loggedInUser);
       res.send(user);
     }
     else{
@@ -182,6 +189,7 @@ router.post('/logout', function(req, res, next){
 //USE COOKIES FOR THIS
   if(loggedInUser != -1){
       loggedInUser = -1; // log out
+      res.clearCookie('currUser');
       res.send({ status: 'OK' });
   }
   else{

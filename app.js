@@ -27,35 +27,35 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Adding a session to add info about the current session
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
-}));
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { secure: false }
+// }));
 
-// Trying to add the cookie here
+// // Trying to add the cookie here
 
-app.use(function (req, res, next) {
-	// check if client sent cookie
-  var cookie = req.cookies.cookieName;
-  if (cookie === undefined)
-  {
-    // no: set a new cookie
-    var randomNumber=Math.random().toString();
-    	randomNumber=randomNumber.substring(2,randomNumber.length);
-   	 	res.cookie('cookieName',randomNumber, { domain: '130.245.168.122', path: '/eliza', secure: false , httpOnly: false});
-	(function() {
-  console.log("Hello World!");
-}).call();  
-} 
-  else
-  {
-    // yes, cookie was already present 
-    console.log('cookie exists', cookie);
-  } 
-  next(); // <-- important!
-})
+// app.use(function (req, res, next) {
+// 	// check if client sent cookie
+//   var cookie = req.cookies.cookieName;
+//   if (cookie === undefined)
+//   {
+//     // no: set a new cookie
+//     var randomNumber=Math.random().toString();
+//     	randomNumber=randomNumber.substring(2,randomNumber.length);
+//    	 	res.cookie('cookieName',randomNumber, { domain: '130.245.168.122', path: '/eliza', secure: false , httpOnly: false});
+// 	(function() {
+//   console.log("Hello World!");
+// }).call();  
+// } 
+//   else
+//   {
+//     // yes, cookie was already present 
+//     console.log('cookie exists', cookie);
+//   } 
+//   next(); // <-- important!
+// })
 
 app.use('/', index);
 app.use('/', eliza_route);

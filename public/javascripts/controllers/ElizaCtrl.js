@@ -39,7 +39,7 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
    	 	 $http({
           method  : 'POST',
           url     : '/DOCTOR',
-          data    : $scope.human, //forms user object
+          data    : { human : $scope.human}, //forms user object
           headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
          })
           .success(function(data) {

@@ -84,30 +84,29 @@ router.post('/eliza/listconv',function(req, res, next){
 
 });
 
-router.post('eliza/adduser',function(req, res, next){
+router.post('/eliza/adduser',function(req, res, next){
+
 
       var username = req.body['username'];
       var pw       = req.body['password'];
       var email    = req.body['email'];
 
-      res.send(req.body);
-
-      // User.create({
-      //   verified: false,
-      //   u_name: username,
-      //   password: pw,
-      //   verify_key: 'JxY3L135',
-      //   email: email 
-      // }, function(err, user){
-      //     if(err){
-      //       res.send({ status: 'ERROR' });
-      //     }
-      //     else{
-      //       res.send({ status: 'OK' });
-      //     }
+      User.create({
+        verified: false,
+        u_name: username,
+        password: pw,
+        verify_key: 'JxY3L135',
+        email: email 
+      }, function(err, user){
+          if(err){
+            res.send({ status: 'ERROR' });
+          }
+          else{
+            res.send({ status: 'OK' });
+          }
 
 
-      // })
+      });
 });
 
 

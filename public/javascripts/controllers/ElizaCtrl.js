@@ -43,7 +43,7 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
           });
     };
 
-    $scope.saveConvo = function(){
+    $scope.login = function(){
     	$http({
           method  : 'POST',
           url     : '/login',

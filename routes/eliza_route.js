@@ -90,6 +90,11 @@ router.post('eliza/adduser',function(req, res, next){
       var pw       = req.body['password'];
       var email    = req.body['email'];
 
+
+      console.log(username);
+      console.log(pw);
+      console.log(email);
+
       User.create({
         verified: false,
         u_name: username,

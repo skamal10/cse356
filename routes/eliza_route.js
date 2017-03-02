@@ -143,14 +143,14 @@ router.post('/eliza/login', function(req, res, next){
   User.findOne({'u_name': username},function(err, user){
 
     if(err){
-       res.send({ status: 'ERROR' });
+       res.send({ status: 'ERROR -> User NOT FOUND' });
     }
     else if(user.password === password && user.verified){
       loggedInUser = user._id;
       res.send(user);
     }
     else{
-      res.send({ status: 'ERROR' });
+      res.send({ status: 'ERROR NOT verified' });
     }
 
   });

@@ -4,8 +4,6 @@ autoIncrement.initialize(mongoose);
 
 
 
-
-
 var elizaSchema = new mongoose.Schema({  
   user_id: Number,
   date: { type: Date, default: Date.now },

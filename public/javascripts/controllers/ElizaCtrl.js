@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http, $filter) {
+angular.module('appApp', []).controller('ElizaCtrl', function ($scope, $http, $cookies) {
 
 
 	$scope.responses = [];

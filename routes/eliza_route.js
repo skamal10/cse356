@@ -107,7 +107,7 @@ router.post('eliza/adduser',function(req, res, next){
           }
 
 
-      });
+      })
 });
 
 

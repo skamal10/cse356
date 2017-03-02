@@ -34,7 +34,7 @@ var response = {eliza : randomResponse[index]};
 
 var responses = [req.body , response];
 
-  if(current_convo == -1){
+  if(currentConvo == -1){
         createNewConvo(responses);
   }
   else{

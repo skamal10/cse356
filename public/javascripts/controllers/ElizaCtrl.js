@@ -87,5 +87,15 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
 
     }
 
+    $scope.getCurrentUser = function(){
+        $http({
+          method  : 'GET',
+          url     : '/getCurrUser'
+         })
+          .success(function(data) {
+              console.log(data);
+          });
+    }
+
 
   });

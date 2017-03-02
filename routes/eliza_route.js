@@ -149,6 +149,9 @@ router.post('/eliza/login', function(req, res, next){
       loggedInUser = user._id;
       res.send(user);
     }
+    else{
+      res.send({ status: 'ERROR' });
+    }
 
   });
 

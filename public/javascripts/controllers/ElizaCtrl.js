@@ -17,7 +17,7 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
    	}
 
     $scope.printCookies= function(){
-      alert($cookies.get('test'));
+      alert($cookies.get('cokkieName'));
     }
 
 

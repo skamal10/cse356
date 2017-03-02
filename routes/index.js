@@ -19,6 +19,9 @@ router.get('/eliza', function(req, res, next) {
 res.cookie('cookieName','edqfdr3f', { domain: '130.245.168.122', path: '/eliza',httpOnly: false, secure: false });
 res.render('eliza');
 });
+// router.get('/eliza', function(req, res, next) {
+//   res.render('eliza');
+// });
 
 
 

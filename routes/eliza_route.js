@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
       loggedInUser= req.cookies.currUser;
   }
   res.render('eliza');
-  
+
 });
 
 
@@ -196,6 +196,10 @@ router.post('/logout', function(req, res, next){
     res.send({ status: 'ERROR' });
   }
 
+});
+
+router.get('/getCurrUser',function(req,res,next){
+  res.send(loggedInUser);
 });
 
 

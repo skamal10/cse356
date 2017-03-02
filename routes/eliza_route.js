@@ -110,7 +110,7 @@ router.post('/eliza/adduser',function(req, res, next){
 });
 
 
-router.post('eliza/verify', function(req, res, next){
+router.post('/eliza/verify', function(req, res, next){
 
   var email = req.body['email'];
   var key   = req.body['key'];
@@ -135,7 +135,7 @@ router.post('eliza/verify', function(req, res, next){
 
 });
 
-router.post('eliza/login', function(req, res, next){
+router.post('/eliza/login', function(req, res, next){
 
   var username = req.body['username'];
   var password = req.body['password'];

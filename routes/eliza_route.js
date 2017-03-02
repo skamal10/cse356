@@ -31,6 +31,7 @@ var randomResponse = ["Sorry, I don't understand", "Why do you say that?", "Tell
 router.get('/', function(req, res, next) {
 
   if(req.cookies.currUser){
+      console.log('USING COOKIES TO LOG-IN');
       loggedInUser= req.cookies.currUser;
   }
   res.render('eliza');

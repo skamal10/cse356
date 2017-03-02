@@ -2,7 +2,7 @@
 
 
 angular.
-module('myApp', ['ngCookies']).
+module('myApp', []).
   config(function ($routeProvider) {
     $routeProvider
       .when('/', {

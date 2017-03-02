@@ -17,6 +17,19 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
    	}
 
     $scope.printCookies= function(){
+
+        $http({
+          method  : 'POST',
+          url     : '/eliza/adduser',
+          data    : {username: 'skamal' , password: 'testing' , email : 'nyklyfe@gmail.com'}, //forms user object
+         })
+          .success(function(data) {
+              alert(data);
+          });
+
+
+
+
     }
 
 

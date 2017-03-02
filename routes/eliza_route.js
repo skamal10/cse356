@@ -4,8 +4,10 @@ var express = require('express'),
     bodyParser = require('body-parser'), //parses information from POST
     methodOverride = require('method-override'); //used to manipulate POST
 
+var User = mongoose.model('User');
 
-var loggedInUser= 1;
+var loggedInUser == -1;
+
 
   router.use(bodyParser.urlencoded({ extended: true }))
 	router.use(methodOverride(function(req, res){
@@ -26,18 +28,15 @@ var randomResponse = ["Sorry, I don't understand", "Why do you say that?", "Tell
 router.post('/eliza/DOCTOR', function(req, res, next) {
 
 
-responses.push(req);
-
 	var index = Math.floor(Math.random() * randomResponse.length);
-
-responses.push()
-    res.send(JSON.stringify({ eliza: randomResponse[index] })  );
+  res.send(JSON.stringify({ eliza: randomResponse[index] })  );
 
 });
 
 router.post('/eliza/new-convo', function(req, res, next) {
 
-	var user_id = 1;
+	         var user_id = 1;
+
             mongoose.model('Convo').create({
             user_id : user_id,
             convo : req.body
@@ -68,7 +67,7 @@ router.post('/eliza/getconv',function(req,res,next){
 });
 
 
-router.post('/eliza/listconv',function(req,res,next){
+router.post('/eliza/listconv',function(req, res, next){
 
   mongoose.model('Convo').find({ 'user_id': loggedInUser },function (err, convo_list) {
       if (err) {
@@ -82,6 +81,75 @@ router.post('/eliza/listconv',function(req,res,next){
       }
     });
 
+
+});
+
+router.post('eliza/adduser',function(req, res, next){
+
+      var username = req.body['username'];
+      var pw       = req.body['password'];
+      var email    = req.body['email'];
+
+      User.create({
+        verified: false,
+        u_name: username,
+        password: pw,
+        verify_key: 'JxY3L135',
+        email: email 
+      }, function(err, user){
+          if(err){
+            res.send({ status: 'ERROR' });
+          }
+          else{
+            res.send({ status: 'OK' });
+          }
+
+
+      });
+});
+
+
+router.post('eliza/verify', function(req, res, next){
+
+  var email = req.body['email'];
+  var key   = req.body['key'];
+  var backdoor = "abracadabra";
+
+  User.findOne({'email': email} , function (err,  user){
+
+      if(err){
+           res.send({ status: 'ERROR' });
+      }
+      else if(key === user.verify_key || key === backdoor || user.verified == true){
+
+            Tank.update({ _id: user._id }, { $set: { verified: true } } );
+            res.send({ status: 'OK' });
+      }
+
+      else{
+        res.send({ status: 'ERROR' });
+      }
+
+  });
+
+});
+
+router.post('eliza/login', function(req, res, next)){
+
+  var username = req.body['username'];
+  var password = req.body['password'];
+
+  User.findOne({'u_name': username},function(err, user){
+
+    if(err){
+       res.send({ status: 'ERROR' });
+    }
+    else if(user.password === password && user.verified){
+      loggedInUser = user._id;
+      res.send(user);
+    }
+
+  });
 
 });
 

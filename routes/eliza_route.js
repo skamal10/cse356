@@ -6,7 +6,7 @@ var express = require('express'),
 
 var User = mongoose.model('User');
 
-var loggedInUser == -1;
+var loggedInUser = -1;
 
 
   router.use(bodyParser.urlencoded({ extended: true }))

@@ -134,7 +134,7 @@ router.post('eliza/verify', function(req, res, next){
 
 });
 
-router.post('eliza/login', function(req, res, next)){
+router.post('eliza/login', function(req, res, next){
 
   var username = req.body['username'];
   var password = req.body['password'];

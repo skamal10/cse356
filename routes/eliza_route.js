@@ -118,10 +118,10 @@ router.post('/eliza/verify', function(req, res, next){
 
   User.findOne({'email': email} , function (err,  user){
 
-      if(err){
+      if(err || !user){
            res.send({ status: 'ERROR' });
       }
-      else if(key === user.verify_key || key === backdoor || user.verified == true){
+      else if( key === user.verify_key || key === backdoor || user.verified == true){
 
             Tank.update({ _id: user._id }, { $set: { verified: true } } );
             res.send({ status: 'OK' });
@@ -142,7 +142,7 @@ router.post('/eliza/login', function(req, res, next){
 
   User.findOne({'u_name': username},function(err, user){
 
-    if(err){
+    if(err || !user){
        res.send({ status: 'ERROR -> User NOT FOUND' });
     }
     else if(user.password === password && user.verified){

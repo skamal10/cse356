@@ -42,12 +42,12 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
  				$scope.human=""; // clear the input field after submission
           });
     };
-
+/*
     $scope.login = function(){
     	$http({
           method  : 'POST',
           url     : '/login',
-          data    : {username: 'skamal7093' , password: 'testing123'} //forms user object
+          data    : {username: $scope.username , password: $scope.password} //forms user object
          })
           .success(function(data) {
  				         console.log(data);
@@ -66,7 +66,7 @@ angular.module('appApp', ['ngCookies']).controller('ElizaCtrl', function ($scope
                  $scope.loaded=true;
           });
     }
-
+*/
     $scope.listConvos = function() {
 
          $http({

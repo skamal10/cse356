@@ -46,14 +46,14 @@ router.post('/DOCTOR', function(req, res, next) {
   var index = Math.floor(Math.random() * randomResponse.length);
   var response = {eliza : randomResponse[index]};
   var responses = [req.body , response];
-
+if(loggedInUser != -1){	
   if(currentConvo == -1){
         createNewConvo(responses);
   }
   else{
         updateConvo(req.body,response);
   }
-
+}
 
   res.send(JSON.stringify({ eliza: randomResponse[index] })  );
 
@@ -79,7 +79,7 @@ router.post('/getconv',function(req,res,next){
 
   var id= req.body['id'];
   mongoose.model('Convo').findOne({ '_id': id },function (err, convo) {
-      if (err || !convo) {
+      if (err || !convo || loggedInUser != id) {
         res.send({ status: 'ERROR' });
       } else {
           var response= {};
@@ -96,7 +96,7 @@ router.post('/getconv',function(req,res,next){
 router.post('/listconv',function(req, res, next){
 
   mongoose.model('Convo').find({ 'user_id': loggedInUser },function (err, convo_list) {
-      if (err || !convo_list) {
+      if (err || !convo_list || loggedInUser == -1) {
         res.send({ status: 'ERROR' });
       } else {
 
@@ -170,15 +170,15 @@ router.post('/login', function(req, res, next){
   User.findOne({'u_name': username},function(err, user){
 
     if(err || !user){
-       res.send({ status: 'ERROR -> User NOT FOUND' });
+       res.send({ status: 'ERROR' });
     }
     else if(user.password === password && user.verified){
       loggedInUser = user._id;
       res.cookie('currUser', loggedInUser);
-      res.send(user);
+      res.send({status: 'OK'});
     }
     else{
-      res.send({ status: 'ERROR NOT verified' });
+      res.send({ status:  'ERROR' });
     }
 
   });

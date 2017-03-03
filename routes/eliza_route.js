@@ -87,7 +87,18 @@ router.post('/getconv',function(req,res,next){
       } else {
           var response= {};
           response.status = "OK";
-          response.conversation = convo;
+          response.conversation = [];
+
+          for(var i=0; i < convo.convo.length; i++){
+              var x = {
+                timestamp: Date.now(),
+                name: 'nametest',
+                text: convo.convo[i]
+              }
+
+            response.conversation.push(x);
+        
+          }
           res.send(response);
       }
     });

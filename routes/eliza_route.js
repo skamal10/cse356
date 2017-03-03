@@ -8,7 +8,7 @@ var User = mongoose.model('User');
 
 var loggedInUser = -1;
 var currentConvo = -1;
-
+var userName = null;
 
   router.use(bodyParser.urlencoded({ extended: true }))
 	router.use(methodOverride(function(req, res){
@@ -47,12 +47,12 @@ router.post('/DOCTOR', function(req, res, next) {
   var response = {eliza : randomResponse[index]};
   var responses = [req.body , response];
 if(loggedInUser != -1){	
-  if(currentConvo == -1){
-        createNewConvo(responses);
-  }
-  else{
-        updateConvo(req.body,response);
-  }
+        var sucess = updateConvo(req.body,response);
+	if(!sucess){
+	  createNewConvo(responses);
+	  updateConvo(req.body, response);
+	}
+  
 
   res.send(JSON.stringify({ eliza: randomResponse[index] })  );
 }
@@ -90,10 +90,17 @@ router.post('/getconv',function(req,res,next){
           response.conversation = [];
 
           for(var i=0; i < convo.convo.length; i++){
+		  var current_name = null;
+
+		  if(i % 2 == 0)
+			current_name = userName;
+		  else
+			current_name = "eliza";
+
               var x = {
                 timestamp: Date.now(),
-                name: 'nametest',
-                text: convo.convo[i]
+                name: current_name,
+                text: convo.convo[i] // might have to fix this, maybe ..
               }
 
             response.conversation.push(x);
@@ -207,6 +214,8 @@ router.post('/login', function(req, res, next){
     }
     else if(user.password === password && user.verified){
       loggedInUser = user._id;
+      userName = user.u_name;
+      currentConvo = loggedInUser;
       res.cookie('currUser', loggedInUser);
       res.send({status: 'OK'});
     }
@@ -223,6 +232,9 @@ router.post('/logout', function(req, res, next){
 //USE COOKIES FOR THIS
   if(loggedInUser != -1){
       loggedInUser = -1; // log out
+	userName = null;
+	currentConvo = -1;
+
       res.clearCookie('currUser');
       res.send({ status: 'OK' });
   }
@@ -256,11 +268,12 @@ var updateConvo = function(input, response){
       if(err || !newConvo){
         return false;
       }
-      else{
-          newConvo.convo.push(input);
-          newConvo.convo.push(response);
-          newConvo.save();
-          return true;
+	  else{
+		newConvo.convo.push(input);
+		newConvo.convo.push(response);
+		newConvo.save();
+		return true;
+	  
       }
 
 

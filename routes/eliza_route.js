@@ -105,7 +105,18 @@ router.post('/listconv',function(req, res, next){
 
           var convos= {};
           convos.status= 'OK';
-          convos.conversations = convo_list.slice();
+          convos.conversations = [];
+
+          for( var i=0; i<convo_list.length; i++){
+            var convo = {
+                id: convo_list[i]._id,
+                start_date : convo_list[i].date
+              };
+             convos.conversations.push(convo);
+          }
+
+
+
           res.send(convos);
       }
     });

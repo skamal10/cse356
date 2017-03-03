@@ -53,9 +53,12 @@ if(loggedInUser != -1){
   else{
         updateConvo(req.body,response);
   }
-}
 
   res.send(JSON.stringify({ eliza: randomResponse[index] })  );
+}
+else{
+  res.send({ status: 'ERROR' });
+}
 
 });
 

@@ -142,14 +142,17 @@ router.post('/adduser',function(req, res, next){
       var pw       = req.body['password'];
       var email    = req.body['email'];
 
-      User.create({
+
+      if(username && pw && email){
+
+                User.create({
         verified: false,
         u_name: username,
         password: pw,
         verify_key: 'JxY3L135',
         email: email 
       }, function(err, user){
-          if(err){
+          if(err || !user){
             res.send({ status: 'ERROR' });
           }
           else{
@@ -158,6 +161,11 @@ router.post('/adduser',function(req, res, next){
 
 
       });
+
+      }
+      else{
+          res.send({ status: 'ERROR' });
+      }
 });
 
 

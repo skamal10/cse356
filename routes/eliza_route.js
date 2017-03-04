@@ -8,7 +8,7 @@ var User = mongoose.model('User');
 
 var loggedInUser = -1;
 var currentConvo = -1;
-
+var currentUserName = null;
 
   router.use(bodyParser.urlencoded({ extended: true }))
 	router.use(methodOverride(function(req, res){
@@ -90,10 +90,21 @@ router.post('/getconv',function(req,res,next){
           response.conversation = [];
 
           for(var i=0; i < convo.convo.length; i++){
-              var x = {
+		  var current_name = null;
+		  var current_key = null;
+
+		  if(i % 2 == 0){
+		    current_name = currentUserName;
+		    current_key = "human";
+		  }
+		  else{
+			current_name = "eliza";
+		      current_key = "eliza";
+		  }
+		  var x = {
                 timestamp: Date.now(),
-                name: 'nametest',
-                text: convo.convo[i]
+                name: current_name,
+                text: convo.convo[i][current_key]
               }
 
             response.conversation.push(x);
@@ -207,6 +218,7 @@ router.post('/login', function(req, res, next){
     }
     else if(user.password === password && user.verified){
       loggedInUser = user._id;
+      currentUserName = user.u_name;
       res.cookie('currUser', loggedInUser);
       res.send({status: 'OK'});
     }
@@ -224,6 +236,7 @@ router.post('/logout', function(req, res, next){
   if(loggedInUser != -1){
       loggedInUser = -1; // log out
       currentConvo = -1;
+	currentUserName = null;
 	res.clearCookie('currUser');
       res.send({ status: 'OK' });
   }

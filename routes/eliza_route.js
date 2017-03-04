@@ -82,7 +82,7 @@ router.post('/getconv',function(req,res,next){
 
   var id= req.body['id'];
   mongoose.model('Convo').findOne({ '_id': id },function (err, convo) {
-      if (err || !convo || loggedInUser != id) {
+      if (err || !convo || loggedInUser != convo.user_id) {
         res.send({ status: 'ERROR' });
       } else {
           var response= {};
@@ -223,7 +223,8 @@ router.post('/logout', function(req, res, next){
 //USE COOKIES FOR THIS
   if(loggedInUser != -1){
       loggedInUser = -1; // log out
-      res.clearCookie('currUser');
+      currentConvo = -1;
+	res.clearCookie('currUser');
       res.send({ status: 'OK' });
   }
   else{

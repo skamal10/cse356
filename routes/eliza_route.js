@@ -219,6 +219,7 @@ router.post('/login', function(req, res, next){
     else if(user.password === password && user.verified){
       loggedInUser = user._id;
       currentUserName = user.u_name;
+      currentConvo = -1;
       res.cookie('currUser', loggedInUser);
       res.send({status: 'OK'});
     }

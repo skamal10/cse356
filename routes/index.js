@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var amqp = require('amqplib/callback_api');
 
 router.get('/hw1.yml', function(req, res, next) {
     var file = 'files/hw1.yml';
@@ -20,7 +20,6 @@ router.post('/listen',function(req,res,next) {
 
 
 amqp.connect('amqp://localhost', function(err, conn) {
-  var amqp = require('amqplib/callback_api');
   conn.createChannel(function(err, ch) {
     var ex = 'hw3';
 
@@ -43,7 +42,6 @@ amqp.connect('amqp://localhost', function(err, conn) {
 });
 
 router.post('/speak',function(req, res, next){
-  var amqp = require('amqplib/callback_api');
 	amqp.connect('amqp://localhost', function(err, conn) {
   		conn.createChannel(function(err, ch) {
     		var ex = 'hw3';

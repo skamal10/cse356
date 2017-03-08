@@ -16,7 +16,7 @@ router.get('/eliza', function(req, res, next) {
 
 router.post('/listen',function(req,res,next) {
 
-var msgret = null;
+var msgret = false;
 
 amqp.connect('amqp://localhost', function(err, conn) {
   conn.createChannel(function(err, ch) {
@@ -29,13 +29,14 @@ amqp.connect('amqp://localhost', function(err, conn) {
       });
 
       ch.consume(q.queue, function(msg) {
-          console.log(msg.content.toString());
-          msgret= {"msg" : msg.content.toString()};
+          if(msgret==false){
+              msgret= {"msg" : msg.content.toString()};
+              msgret = true;
+          }
       },{noAck: true});
     });
   });
 });
-res.send(msgret);
 });
 
 router.post('/speak',function(req, res, next){

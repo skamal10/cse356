@@ -33,8 +33,8 @@ amqp.connect('amqp://localhost', function(err, conn) {
       });
 
       ch.consume(q.queue, function(msg) {
+        res.send(msg);
       }, {noAck: true});
-      res.send(msg);
     });
   });
 });

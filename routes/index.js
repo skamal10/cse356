@@ -16,11 +16,11 @@ router.get('/eliza', function(req, res, next) {
 
 router.post('/listen',function(req,res,next) {
 
+var msgret = null;
 
 amqp.connect('amqp://localhost', function(err, conn) {
   conn.createChannel(function(err, ch) {
     var ex = 'hw3';
-    var reg = false;
     ch.assertExchange(ex, 'direct', {durable: false});
     ch.assertQueue('', {exclusive: true}, function(err, q) {
 
@@ -29,10 +29,7 @@ amqp.connect('amqp://localhost', function(err, conn) {
       });
 
       ch.consume(q.queue, function(msg) {
-        if(reg==false){
-            res.send(({"msg": msg}));
-            reg=true;
-        }
+          msgret= {"msg" : msg};
       },{noAck: true});
     });
   });

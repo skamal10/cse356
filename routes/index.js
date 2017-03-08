@@ -30,8 +30,9 @@ amqp.connect('amqp://localhost', function(err, conn) {
 
       ch.consume(q.queue, function(msg) {
           if(msgret==false){
-              msgret= {"msg" : msg.content.toString()};
               msgret = true;
+              msgret= {"msg" : msg.content.toString()};
+              res.send(msgret);
           }
       },{noAck: true});
     });

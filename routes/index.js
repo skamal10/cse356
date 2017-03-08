@@ -15,15 +15,13 @@ router.get('/eliza', function(req, res, next) {
 });
 
 router.post('/listen',function(req,res,next) {
-  var reg = false;
 
 
 amqp.connect('amqp://localhost', function(err, conn) {
   conn.createChannel(function(err, ch) {
     var ex = 'hw3';
-
+    var reg = false;
     ch.assertExchange(ex, 'direct', {durable: false});
-
     ch.assertQueue('', {exclusive: true}, function(err, q) {
 
       req.body['keys'].forEach(function(severity) {

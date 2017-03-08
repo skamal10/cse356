@@ -51,6 +51,7 @@ router.post('/speak',function(req, res, next){
 
     		ch.assertExchange(ex, 'direct', {durable: false});
     		ch.publish(ex, req.body['key'], new Buffer(req.body['msg']));
+        res.send({status: 'OK'});
     	
   	});
 

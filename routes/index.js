@@ -29,8 +29,8 @@ amqp.connect('amqp://localhost', function(err, conn) {
       });
 
       ch.consume(q.queue, function(msg) {
-          console.log(msg);
-          msgret= {"msg" : msg};
+          console.log(msg.content.toString());
+          msgret= {"msg" : msg.content.toString()};
       },{noAck: true});
     });
   });

@@ -15,7 +15,7 @@ router.get('/eliza', function(req, res, next) {
 });
 
 router.post('/listen',function(req,res,next) {
-var msgret = [];
+  var reg = false;
 
 
 amqp.connect('amqp://localhost', function(err, conn) {
@@ -31,7 +31,10 @@ amqp.connect('amqp://localhost', function(err, conn) {
       });
 
       ch.consume(q.queue, function(msg) {
-        msgret.push(msg);
+        if(reg==false){
+            res.send(({"msg": msg}));
+            reg=true;
+        }
       },{noAck: true});
     });
   });
@@ -47,7 +50,6 @@ router.post('/speak',function(req, res, next){
 
     		ch.assertExchange(ex, 'direct', {durable: false});
     		ch.publish(ex, req.body['key'], new Buffer(req.body['msg']));
-       
     		res.send({"status" : "OK"});
   	});
 
